@@ -104,6 +104,8 @@ document.addEventListener('DOMContentLoaded', () => {
         isGameOver = true
         clearInterval(upTimerId)
         clearInterval(downTimerId)
+        clearInterval(leftTimerId)
+        clearInterval(rightTimerId)
     }
 
     // Move left, right or straight
@@ -128,7 +130,7 @@ document.addEventListener('DOMContentLoaded', () => {
             doodlerLeftSpace -= 5
             doodler.style.left = doodlerLeftSpace + 'px'
             } else moveRight()
-        }, 30)
+        }, 20)
     }
 
     function moveRight() {
@@ -142,7 +144,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 doodlerLeftSpace += 5
                 doodler.style.left = doodlerLeftSpace + 'px'
             } else moveLeft()
-        }, 30)
+        }, 20)
     }
 
     function moveStraight() {
