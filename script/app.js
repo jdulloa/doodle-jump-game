@@ -102,6 +102,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function gameOver() {
         isGameOver = true
+        while (grid.firstChild) {
+            grid.removeChild(grid.firstChild)
+        }
         clearInterval(upTimerId)
         clearInterval(downTimerId)
         clearInterval(leftTimerId)
