@@ -107,6 +107,10 @@ document.addEventListener('DOMContentLoaded', () => {
             grid.removeChild(grid.firstChild)
         }
         grid.innerHTML = score
+        const resetButton = document.createElement('button')
+        resetButton.setAttribute("onClick", "window.location.reload()")
+        resetButton.innerText = "Play again"
+        document.querySelector('.grid').appendChild(resetButton)
         clearInterval(upTimerId)
         clearInterval(downTimerId)
         clearInterval(leftTimerId)
