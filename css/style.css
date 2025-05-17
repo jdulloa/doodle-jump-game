@@ -6,6 +6,9 @@
     font-family: Arial, Helvetica, sans-serif;
     font-size: 200px;
     text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .doodler {
@@ -45,3 +48,25 @@ button {
   button:hover {
     background: #ffae00d5;
   }
+
+  .center-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.score {
+    font-size: 190px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #222;
+}
+
+.info-paragraph {
+    font-size: 20px;
+    color: #000;
+    text-align: center;
+    margin-top: 10px;
+}

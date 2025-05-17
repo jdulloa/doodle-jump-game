@@ -101,16 +101,58 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 30)
     }
 
+    function resetGame() {
+        // Reset all variables to initial state
+        doodlerLeftSpace = 50
+        startPoint = 150
+        doodlerBottomSpace = startPoint
+        isGameOver = false
+        platforms = []
+        score = 0
+        isJumping = true
+        isGoingLeft = false
+        isGoingRight = false
+        clearInterval(upTimerId)
+        clearInterval(downTimerId)
+        clearInterval(leftTimerId)
+        clearInterval(rightTimerId)
+        grid.innerHTML = ''
+    }
+
     function gameOver() {
         isGameOver = true
         while (grid.firstChild) {
             grid.removeChild(grid.firstChild)
         }
-        grid.innerHTML = score
+
+        // Create a container for centering
+        const centerContainer = document.createElement('div')
+        centerContainer.className = 'center-container'
+
+        // Score
+        const scoreElem = document.createElement('div')
+        scoreElem.className = 'score'
+        scoreElem.innerText = score
+
+        // Button
         const resetButton = document.createElement('button')
-        resetButton.setAttribute("onClick", "window.location.reload()")
         resetButton.innerText = "Play again"
-        document.querySelector('.grid').appendChild(resetButton)
+        resetButton.addEventListener('click', () => {
+            resetGame()
+            start()
+        })
+
+        // Info paragraph
+        const info = document.createElement('p')
+        info.className = 'info-paragraph'
+        info.innerText = "Or Press Enter ⎆"
+
+        // Append all to container
+        centerContainer.appendChild(scoreElem)
+        centerContainer.appendChild(resetButton)
+        centerContainer.appendChild(info)
+        grid.appendChild(centerContainer)
+
         clearInterval(upTimerId)
         clearInterval(downTimerId)
         clearInterval(leftTimerId)
@@ -173,5 +215,45 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
     // Attach to button
-    start()
+    function showStartButton() {
+        grid.innerHTML = ''
+
+        // Create a container for centering
+        const centerContainer = document.createElement('div')
+        centerContainer.className = 'center-container'
+
+        // Score (optional, show 0 at start)
+        const scoreElem = document.createElement('div')
+        scoreElem.className = 'score'
+        scoreElem.innerText = score
+
+        // Button
+        const playButton = document.createElement('button')
+        playButton.innerText = "Start Game"
+        playButton.addEventListener('click', () => {
+            resetGame()
+            start()
+        })
+
+        // Info paragraph
+        const info = document.createElement('p')
+        info.className = 'info-paragraph'
+        info.innerText = "Or Press Enter ⎆"
+
+        // Append all to container
+        centerContainer.appendChild(scoreElem)
+        centerContainer.appendChild(playButton)
+        centerContainer.appendChild(info)
+        grid.appendChild(centerContainer)
+    }
+
+    // Listen for Enter key to start the game
+    document.addEventListener('keydown', function(e) {
+        if ((e.key === "Enter" || e.key === "NumpadEnter") && !document.querySelector('.doodler')) {
+            resetGame()
+            start()
+        }
+    })
+
+    showStartButton()
 })
